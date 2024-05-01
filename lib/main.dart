@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:pillbox/principal.dart';
+import 'principal.dart';
 
 void main() => runApp(const MyApp());
 

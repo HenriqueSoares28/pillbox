@@ -1,35 +1,80 @@
 import 'package:flutter/material.dart';
+import 'package:pillbox/editar.dart';
+import 'package:pillbox/principal.dart';
 
-class Navbar extends StatelessWidget {
-  const Navbar({super.key});
+class Navbar extends StatefulWidget {
+  const Navbar({Key? key}) : super(key: key);
+
+  @override
+  _NavbarState createState() => _NavbarState();
+}
+
+class _NavbarState extends State<Navbar> {
+  int index = 1;
+  final pages = [
+    Container(
+      color: Colors.black,
+      child: const Center(
+        child: Text(
+          'Search',
+          style: TextStyle(
+            color: Colors.white,
+            fontSize: 30,
+          ),
+        ),
+      ),
+    ),
+    const PagPrincipal(),
+    const PagEdit(),
+  ];
+
+
   @override
   Widget build(BuildContext context) {
     return BottomNavigationBar(
-      backgroundColor: const Color.fromARGB(11, 15, 15, 15),
-      showSelectedLabels: false,
-      showUnselectedLabels: false,
-      items: <BottomNavigationBarItem>[
+      backgroundColor: const Color.fromARGB(255, 15, 15, 15),
+      currentIndex: index,
+      showSelectedLabels: true,
+      showUnselectedLabels: true,
+      unselectedItemColor: Colors.white,
+      onTap: (index) {
+        if (index == 0) {
+          Navigator.pushReplacementNamed(context, '/editar.');
+        }
+        if (index == 1) {
+          Navigator.pushReplacementNamed(context, '/editar');
+        }
+        if (index == 2) {
+          Navigator.pushReplacementNamed(context, '/editar');
+        }
+      },
+      items: [
         const BottomNavigationBarItem(
           icon: Icon(
             Icons.mode_edit,
             color: Colors.white,
+            size: 40,
           ),
-          label: 'Search',
+          label: 'Editar',
         ),
         BottomNavigationBarItem(
-          activeIcon: Image.asset(
-          'imagens/LogoAtivo.png',
-           width: 30,
-           ),
-           icon: Image.asset(
-          'imagens/Logo.png',
-          width: 30,
+          activeIcon: NavBarIconButton(
+            onPressed: () {
+              // Handle button press action
+            },
           ),
-  ),
+          icon: NavBarIconButton(
+            onPressed: () {
+              // Handle button press action
+            },
+          ),
+          label: 'Menu',
+        ),
         const BottomNavigationBarItem(
           icon: Icon(
             Icons.settings,
             color: Colors.white,
+            size: 40,
           ),
           label: 'Configurar',
         ),
@@ -51,12 +96,12 @@ class NavBarIconButton extends StatelessWidget {
         padding: const EdgeInsets.all(10),
         decoration: BoxDecoration(
           color: const Color.fromARGB(255, 8, 8, 8),
-          borderRadius: BorderRadius.circular(30),
+          borderRadius: BorderRadius.circular(100),
         ),
         child: Image.asset(
-          'imagens/Logo.png', // Imagem do botão central
-          width: 40,
-          height: 40,
+          '/home/lloures/Documentos/GitHub/bookbox2/pillbox/imagens/Logo.png', // Imagem do botão central
+          width: 50,
+          height: 50,
         ),
       ),
     );
