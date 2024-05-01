@@ -3,7 +3,7 @@ import 'package:pillbox/editar.dart';
 import 'package:pillbox/principal.dart';
 
 class Navbar extends StatefulWidget {
-  const Navbar({Key? key}) : super(key: key);
+  const Navbar({Key? key});
 
   @override
   _NavbarState createState() => _NavbarState();
@@ -28,81 +28,72 @@ class _NavbarState extends State<Navbar> {
     const PagEdit(),
   ];
 
-
   @override
   Widget build(BuildContext context) {
-    return BottomNavigationBar(
-      backgroundColor: const Color.fromARGB(255, 15, 15, 15),
-      currentIndex: index,
-      showSelectedLabels: true,
-      showUnselectedLabels: true,
-      unselectedItemColor: Colors.white,
-      onTap: (index) {
-        if (index == 0) {
-          Navigator.pushReplacementNamed(context, '/editar.');
-        }
-        if (index == 1) {
-          Navigator.pushReplacementNamed(context, '/editar');
-        }
-        if (index == 2) {
-          Navigator.pushReplacementNamed(context, '/editar');
-        }
-      },
-      items: [
-        const BottomNavigationBarItem(
-          icon: Icon(
-            Icons.mode_edit,
-            color: Colors.white,
-            size: 40,
+    return Scaffold(
+      body: Stack(
+        children: [
+          Positioned.fill(
+            child: IndexedStack(
+              index: index,
+              children: pages,
+            ),
           ),
-          label: 'Editar',
-        ),
-        BottomNavigationBarItem(
-          activeIcon: NavBarIconButton(
-            onPressed: () {
-              // Handle button press action
-            },
+          Align(
+            alignment: Alignment.bottomCenter,
+            child: Container(
+              color: const Color.fromARGB(255, 15, 15, 15),
+              padding: const EdgeInsets.symmetric(horizontal: 20),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  IconButton(
+                    icon: const Icon(
+                      Icons.mode_edit,
+                      color: Colors.white,
+                      size: 40,
+                    ),
+                    onPressed: () {
+                      setState(() {
+                        index = 0;
+                      });
+                    },
+                  ),
+                  Container(
+                    width: 60,
+                    height: 60,
+                    decoration: BoxDecoration(
+                      shape: BoxShape.circle,
+                      border: Border.all(color: Colors.white, width: 2),
+                    ),
+                    child: IconButton(
+                      icon: Image.asset(
+                        '/home/lloures/Documentos/GitHub/bookbox2/pillbox/imagens/Logo.png',
+                        width: 50,
+                        height: 50,
+                      ),
+                      onPressed: () {
+                        // Handle button press action
+                      },
+                    ),
+                  ),
+                  IconButton(
+                    icon: const Icon(
+                      Icons.settings,
+                      color: Colors.white,
+                      size: 40,
+                    ),
+                    onPressed: () {
+                      setState(() {
+                        index = 2;
+                      });
+                    },
+                  ),
+                ],
+              ),
+            ),
           ),
-          icon: NavBarIconButton(
-            onPressed: () {
-              // Handle button press action
-            },
-          ),
-          label: 'Menu',
-        ),
-        const BottomNavigationBarItem(
-          icon: Icon(
-            Icons.settings,
-            color: Colors.white,
-            size: 40,
-          ),
-          label: 'Configurar',
-        ),
-      ],
-    );
-  }
-}
-
-class NavBarIconButton extends StatelessWidget {
-  final VoidCallback onPressed;
-
-  const NavBarIconButton({super.key, required this.onPressed});
-
-  @override
-  Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: onPressed,
-      child: Container(
-        padding: const EdgeInsets.all(10),
-        decoration: BoxDecoration(
-          color: const Color.fromARGB(255, 8, 8, 8),
-          borderRadius: BorderRadius.circular(100),
-        ),
-        child: Image.asset(
-          '/home/lloures/Documentos/GitHub/bookbox2/pillbox/imagens/Logo.png', // Imagem do botão central
-          width: 50,
-          height: 50,
-        ),
+        ],
       ),
     );
   }

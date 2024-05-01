@@ -1,14 +1,9 @@
 import 'dart:math';
 
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:pillbox/horas.dart';
 import 'package:pillbox/navbar.dart';
-import 'dart:math' as math;
 import 'package:pillbox/visualizarRemedio.dart';
-
-// Variável global para controlar a visibilidade do contêiner
 
 class PagPrincipal extends StatelessWidget {
   const PagPrincipal({Key? key}) : super(key: key);
@@ -63,12 +58,13 @@ class PagPrincipal extends StatelessWidget {
                   alignment: Alignment.center,
                   children: List.generate(8, (index) {
                     final double angle = (2 * pi * index / 8) - (pi / 8); // Ajuste do ângulo inicial
-                    const double radius = 120; // Adjust radius as needed
+                    const double radius = 115; // Adjust radius as needed
 
                     double buttonX = screenWidth / 2 + radius * cos(angle);
                     double buttonY = screenHeight / 2 + radius * sin(angle);
 
                     return Positioned(
+                      
                       left: buttonX - 40, // Adjust button size
                       top: buttonY - 40, // Adjust button size
                       child: ElevatedButton(
@@ -80,11 +76,14 @@ class PagPrincipal extends StatelessWidget {
                           );
                         },
                         style: ElevatedButton.styleFrom(
-                          backgroundColor: const Color.fromARGB(82, 244, 67, 54), // Cor inicial
+                          foregroundColor: const Color.fromARGB(47, 20, 68, 128), backgroundColor: const Color.fromARGB(0, 0, 0, 0), // Cor do botão quando pressionado
                           shape: const CircleBorder(), // Formato circular
-                          minimumSize: const Size(80, 80), // Tamanho mínimo do botão
+                          minimumSize: const Size(50, 60), // Tamanho mínimo do botão
                         ),
-                        child: null,
+                        child: const SizedBox(
+                          width: 30,
+                          height: 60,
+                        ),
                       ),
                     );
                   }),
