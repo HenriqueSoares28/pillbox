@@ -11,7 +11,8 @@ class HorasAoVivo extends StatefulWidget {
 }
 
 class _HorasAoVivoState extends State<HorasAoVivo> {
-  late final StreamController<DateTime> _dateTimeController = StreamController<DateTime>();
+  late final StreamController<DateTime> _dateTimeController =
+      StreamController<DateTime>();
   late Timer _timer;
 
   @override
@@ -53,8 +54,10 @@ class _HorasAoVivoState extends State<HorasAoVivo> {
           }
           return Text(
             DateFormat('HH:mm').format(dateTime),
-            style: const TextStyle(fontSize: 60,
-                      fontWeight: FontWeight.bold,),
+            style: const TextStyle(
+              fontSize: 60,
+              fontWeight: FontWeight.bold,
+            ),
           );
         } else if (snapshot.hasError) {
           return const Text(

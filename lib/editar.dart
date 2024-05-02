@@ -31,7 +31,7 @@ class PagEdit extends StatelessWidget {
                   ),
                 ),
                 child: Image.asset(
-                  '/home/lloures/Documentos/GitHub/bookbox2/pillbox/imagens/Cartela.png',
+                  'imagens/Cartela.png',
                   width: 650,
                   height: 325,
                 ),
