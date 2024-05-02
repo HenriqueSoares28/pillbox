@@ -27,74 +27,80 @@ class _NavbarState extends State<Navbar> {
     const PagPrincipal(),
     const PagEdit(),
   ];
-
-  @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Stack(
-        children: [
-          Positioned.fill(
-            child: IndexedStack(
-              index: index,
-              children: pages,
+      bottomNavigationBar: BottomAppBar(
+        color: const Color.fromARGB(255, 0, 0, 0),
+        shape: const CircularNotchedRectangle(),
+        elevation: 0, // Set elevation to zero to remove shadow
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          children: [
+            Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                IconButton(
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => const PagEdit()),
+                    );
+                  },
+                  icon: const Icon(
+                    Icons.mode_edit,
+                    color: Colors.white,
+                    size: 40,
+                  ),
+                  tooltip: 'Editar',
+                ),
+                
+              ],
             ),
-          ),
-          Align(
-            alignment: Alignment.bottomCenter,
-            child: Container(
-              color: const Color.fromARGB(255, 15, 15, 15),
-              padding: const EdgeInsets.symmetric(horizontal: 20),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  IconButton(
-                    icon: const Icon(
-                      Icons.mode_edit,
-                      color: Colors.white,
-                      size: 40,
-                    ),
-                    onPressed: () {
-                      setState(() {
-                        index = 0;
-                      });
-                    },
+            Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                IconButton(
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => const PagPrincipal()),
+                    );
+                  },
+                  icon: const Icon(
+                    Icons.notifications,
+                    color: Colors.white,
+                    size: 40,
                   ),
-                  Container(
-                    width: 60,
-                    height: 60,
-                    decoration: BoxDecoration(
-                      shape: BoxShape.circle,
-                      border: Border.all(color: Colors.white, width: 2),
-                    ),
-                    child: IconButton(
-                      icon: Image.asset(
-                        '/home/lloures/Documentos/GitHub/bookbox2/pillbox/imagens/Logo.png',
-                        width: 50,
-                        height: 50,
-                      ),
-                      onPressed: () {
-                        // Handle button press action
-                      },
-                    ),
-                  ),
-                  IconButton(
-                    icon: const Icon(
-                      Icons.settings,
-                      color: Colors.white,
-                      size: 40,
-                    ),
-                    onPressed: () {
-                      setState(() {
-                        index = 2;
-                      });
-                    },
-                  ),
-                ],
-              ),
+                  tooltip: 'Notificações',
+                ),
+                
+              ],
             ),
-          ),
-        ],
+          ],
+        ),
       ),
+      floatingActionButton: SizedBox(
+        width: 90, // Ajuste o tamanho conforme necessário
+        height: 90, // Ajuste o tamanho conforme necessário
+        child: FloatingActionButton(
+          onPressed: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => const PagPrincipal()),
+            );
+          },
+          backgroundColor: const Color.fromARGB(255, 8, 6, 8), // Cor do botão
+          mini: false,
+          shape: const CircleBorder(),
+          materialTapTargetSize: MaterialTapTargetSize.padded, // Define se o botão é mini ou não (false para tamanho normal)
+          child: Image.asset(
+            '/home/lloures/Documentos/GitHub/bookbox2/pillbox/imagens/Logo.png',
+            width: 50, // Tamanho da imagem
+            height: 50, // Tamanho da imagem
+          ),
+        ),
+      ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
     );
   }
 }

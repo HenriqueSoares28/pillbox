@@ -17,7 +17,7 @@ class PagPrincipal extends StatelessWidget {
       title: 'principal',
       home: Scaffold(
         backgroundColor: const Color.fromARGB(245, 255, 249, 226),
-        bottomNavigationBar: const Navbar(),
+        //bottomNavigationBar: const Navbar(),
         body: Stack(
           children: [
             // Image background
