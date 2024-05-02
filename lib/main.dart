@@ -9,7 +9,9 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const PagPrincipal();
+    return new MaterialApp(
+      home: new PagPrincipal()
+      );
   }
 }
  

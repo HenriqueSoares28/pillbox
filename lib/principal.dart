@@ -13,11 +13,9 @@ class PagPrincipal extends StatelessWidget {
     double screenWidth = MediaQuery.of(context).size.width;
     double screenHeight = MediaQuery.of(context).size.height;
 
-    return MaterialApp(
-      title: 'principal',
-      home: Scaffold(
+    return Scaffold(
         backgroundColor: const Color.fromARGB(245, 255, 249, 226),
-        bottomNavigationBar: const Navbar(),
+        // bottomNavigationBar: const Navbar(),
         body: Stack(
           children: [
             // Image background
@@ -31,7 +29,7 @@ class PagPrincipal extends StatelessWidget {
                   ),
                 ),
                 child: Image.asset(
-                  '/home/lloures/Documentos/GitHub/bookbox2/pillbox/imagens/Cartela.png',
+                  'imagens/Cartela.png',
                   width: 650,
                   height: 325,
                 ),
@@ -92,7 +90,6 @@ class PagPrincipal extends StatelessWidget {
             ),
           ],
         ),
-      ),
-    );
+      );
   }
 }

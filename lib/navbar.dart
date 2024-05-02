@@ -68,7 +68,7 @@ class _NavbarState extends State<Navbar> {
                     ),
                     child: IconButton(
                       icon: Image.asset(
-                        '/home/lloures/Documentos/GitHub/bookbox2/pillbox/imagens/Logo.png',
+                        'imagens/Logo.png',
                         width: 50,
                         height: 50,
                       ),
