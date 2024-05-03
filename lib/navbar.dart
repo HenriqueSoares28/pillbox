@@ -24,7 +24,7 @@ class _NavbarState extends State<Navbar> {
         ),
       ),
     ),
-    const PagPrincipal(),
+    PagPrincipal(),
     const PagEdit(),
   ];
 
@@ -46,7 +46,7 @@ class _NavbarState extends State<Navbar> {
         if (index == 1) {
           Navigator.push(
             context,
-            MaterialPageRoute(builder: (context) => const PagPrincipal()),
+            MaterialPageRoute(builder: (context) => PagPrincipal()),
           );
         }
         if (index == 2) {

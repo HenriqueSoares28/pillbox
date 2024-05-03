@@ -5,8 +5,15 @@ import 'package:pillbox/horas.dart';
 import 'package:pillbox/navbar.dart';
 import 'package:pillbox/visualizarRemedio.dart';
 
-class PagPrincipal extends StatelessWidget {
-  const PagPrincipal({super.key});
+class PagPrincipal extends StatefulWidget {
+  PagPrincipal({Key? key}) : super(key: key);
+
+  @override
+  _PagPrincipalState createState() => _PagPrincipalState();
+}
+
+class _PagPrincipalState extends State<PagPrincipal> {
+  bool _showOverlay = false;
 
   @override
   Widget build(BuildContext context) {
@@ -47,6 +54,14 @@ class PagPrincipal extends StatelessWidget {
               ),
             ),
           ),
+          Positioned(
+            top: 170,
+            left: 57,
+            child: Visibility(
+              visible: _showOverlay,
+              child: const OvalWidget(),
+            ),
+          ),
           // Stack of buttons positioned in a circle
           Center(
             child: SizedBox(
@@ -67,13 +82,9 @@ class PagPrincipal extends StatelessWidget {
                     top: buttonY - 40, // Adjust button size
                     child: ElevatedButton(
                       onPressed: () {
-                        // Abra o contêiner de visualização de remédio
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) =>
-                                  const VisualizarRemedio()), // Certifique-se de ter o VisualizarRemedio implementado corretamente
-                        );
+                        setState(() {
+                          _showOverlay = !_showOverlay;
+                        });
                       },
                       style: ElevatedButton.styleFrom(
                         foregroundColor: const Color.fromARGB(47, 20, 68, 128),
