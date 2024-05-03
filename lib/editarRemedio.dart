@@ -6,14 +6,13 @@ import 'package:pillbox/navbar.dart';
 import 'dart:math' as math;
 
 import 'package:pillbox/principal.dart';
+
 class editarRemedio extends StatelessWidget {
   const editarRemedio({super.key});
 
-
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
-    );
+    return const MaterialApp();
   }
 }
 
@@ -23,127 +22,178 @@ class EditarRemedio extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: const Color.fromARGB(245, 255, 249, 226),
+        backgroundColor: Colors.black,
         appBar: AppBar(
-          title: const Text('Remédio'),
+          leading: IconButton(
+            icon: const Icon(
+              Icons.cancel,
+              color: Colors.red,
+              size: 50,
+            ),
+            onPressed: () {
+              Navigator.pop(context);
+            },
+          ),
+          backgroundColor: const Color.fromARGB(255, 11, 11, 11),
+          foregroundColor: Colors.white,
         ),
-        body: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: <Widget>[
-            new Row(
-              children: [
-                Expanded(
-                  flex: 1,
-                  child: Text(
-                    'NOME DO REMÉDIO:',
-                    style: TextStyle(
-                      fontSize: 20,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.black,
-                    ),
-                  ),
-                ),
-                Expanded(
-                  flex: 4,
-                  child: TextField(
-                      // Suas propriedades do TextField aqui
-                      ),
-                ),
-              ],
+        body: Center(
+          child: Container(
+            padding: const EdgeInsets.all(5),
+            width: MediaQuery.of(context).size.width * 0.8,
+            height: MediaQuery.of(context).size.height * 0.8,
+            decoration: BoxDecoration(
+              color: const Color.fromARGB(245, 255, 249, 226),
+              borderRadius: BorderRadius.circular(150),
             ),
-            new Row(
-              children: [
-                Expanded(
-                  flex: 1,
-                  child: Text(
-                    'DIAS:',
-                    style: TextStyle(
-                      fontSize: 20,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.black,
-                    ),
-                  ),
-                ),
-                Expanded(
-                  flex: 5,
-                  child: TextField(
-                      // Suas propriedades do TextField aqui
+            child: Padding(
+              padding: const EdgeInsets.all(10),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: <Widget>[
+                  Row(
+                    children: [
+                      const Expanded(
+                        flex: 1,
+                        child: Text(
+                          'NOME DO REMÉDIO:',
+                          style: TextStyle(
+                            fontSize: 13,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.black,
+                          ),
+                        ),
                       ),
-                ),
-              ],
-            ),
-            new Row(
-              children: [
-                Expanded(
-                  flex: 2,
-                  child: Text(
-                    'VEZES POR DIA:',
-                    style: TextStyle(
-                      fontSize: 20,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.black,
-                    ),
-                  ),
-                ),
-                Expanded(
-                  flex: 2,
-                  child: TextField(
-                      // Suas propriedades do TextField aqui
+                      const SizedBox(width: 10),
+                      Expanded(
+                        flex: 3,
+                        child: TextFormField(
+                          decoration: const InputDecoration(
+                            border: OutlineInputBorder(),
+                            hintText: 'Enter a search term',
+                          ),
+                        ),
                       ),
-                ),
-                Expanded(
-                  flex: 2,
-                  child: Text(
-                    'PILULAS POR VEZ:',
-                    style: TextStyle(
-                      fontSize: 20,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.black,
-                    ),
+                    ],
                   ),
-                ),
-                Expanded(
-                  flex: 2,
-                  child: TextField(
-                      // Suas propriedades do TextField aqui
+                  Row(
+                    children: [
+                      const Expanded(
+                        flex: 1,
+                        child: Text(
+                          'DIAS:',
+                          style: TextStyle(
+                            fontSize: 13,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.black,
+                          ),
+                        ),
                       ),
-                ),
-              ],
-            ),
-            Text(
-              'HORÁRIO:',
-              style: TextStyle(
-                fontSize: 20,
-                fontWeight: FontWeight.bold,
-                color: Colors.black,
+                      const SizedBox(width: 10),
+                      Expanded(
+                        flex: 5,
+                        child: TextFormField(
+                          decoration: const InputDecoration(
+                            border: OutlineInputBorder(),
+                            hintText: 'Enter a search term',
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                  Row(
+                    children: [
+                      const Expanded(
+                        flex: 2,
+                        child: Text(
+                          'VEZES POR DIA:',
+                          style: TextStyle(
+                            fontSize: 13,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.black,
+                          ),
+                        ),
+                      ),
+                      const SizedBox(width: 10),
+                      Expanded(
+                        flex: 2,
+                        child: TextFormField(
+                          keyboardType: TextInputType.number,
+                          decoration: const InputDecoration(
+                            border: OutlineInputBorder(),
+                            hintText: '1,2...',
+                          ),
+                        ),
+                      ),
+                      const SizedBox(width: 10),
+                      const Expanded(
+                        flex: 2,
+                        child: Text(
+                          'PILULAS POR VEZ:',
+                          style: TextStyle(
+                            fontSize: 13,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.black,
+                          ),
+                        ),
+                      ),
+                      const SizedBox(width: 10),
+                      Expanded(
+                        flex: 2,
+                        child: TextFormField(
+                          keyboardType: TextInputType.number,
+                          decoration: const InputDecoration(
+                            border: OutlineInputBorder(),
+                            hintText: '1,2...',
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                  Column(
+                    children: [
+                      const Text(
+                        'HORÁRIO:',
+                        style: TextStyle(
+                          fontSize: 13,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.black,
+                        ),
+                      ),
+                      const SizedBox(height: 10),
+                      SizedBox(
+                        width: 150,
+                        child: TextFormField(
+                          keyboardType: TextInputType.datetime,
+                          decoration: const InputDecoration(
+                            border: OutlineInputBorder(),
+                            hintText: '00:00',
+                          ),
+                        ),
+                      ),
+                      IconButton(
+                        icon: const Icon(
+                          Icons.check_box,
+                          color: Colors.green,
+                          size: 80,
+                        ),
+                        onPressed: () {
+                          // Abra o contêiner de visualização de remédio
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) =>
+                                    PagPrincipal()), // Certifique-se de ter o VisualizarRemedio implementado corretamente
+                          );
+                        },
+                      ),
+                    ],
+                  ),
+                ],
               ),
             ),
-            TextField(
-                // Suas propriedades do TextField aqui
-                ),
-            ElevatedButton(
-              onPressed: () {
-                // Abra o contêiner de visualização de remédio
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) => PagPrincipal()), // Certifique-se de ter o VisualizarRemedio implementado corretamente
-                );
-              },
-              style: ElevatedButton.styleFrom(
-                foregroundColor: const Color.fromARGB(47, 20, 68, 128),
-                backgroundColor: const Color.fromARGB(
-                    0, 0, 0, 0), // Cor do botão quando pressionado
-                shape: const CircleBorder(), // Formato circular
-                minimumSize: const Size(50, 60), // Tamanho mínimo do botão
-              ),
-              child: const SizedBox(
-                width: 30,
-                height: 60,
-              ),
-            ),
-          ],
+          ),
         ));
   }
 }
