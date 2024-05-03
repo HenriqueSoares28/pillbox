@@ -79,7 +79,7 @@ class PagEdit extends StatelessWidget {
                           // Abra o contêiner de visualização de remédio
                           Navigator.push(
                             context,
-                            MaterialPageRoute(builder: (context) => const editarRemedio()), // Certifique-se de ter o VisualizarRemedio implementado corretamente
+                            MaterialPageRoute(builder: (context) => const EditarRemedio()), // Certifique-se de ter o VisualizarRemedio implementado corretamente
                           );
                         },
                         style: ElevatedButton.styleFrom(
