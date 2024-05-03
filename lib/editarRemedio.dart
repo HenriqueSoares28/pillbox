@@ -52,111 +52,122 @@ class EditarRemedio extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: <Widget>[
-                  Row(
-                    children: [
-                      const Expanded(
-                        flex: 1,
-                        child: Text(
-                          'NOME DO REMÉDIO:',
-                          style: TextStyle(
-                            fontSize: 13,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.black,
+                  SizedBox(
+                    height: 50,
+                    width: 250,
+                    child: Row(
+                      children: [
+                        const Expanded(
+                          flex: 1,
+                          child: Text(
+                            'NOME DO REMÉDIO:',
+                            style: TextStyle(
+                              fontSize: 15,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.black,
+                            ),
                           ),
                         ),
-                      ),
-                      const SizedBox(width: 10),
-                      Expanded(
-                        flex: 3,
-                        child: TextFormField(
-                          decoration: const InputDecoration(
-                            border: OutlineInputBorder(),
-                            hintText: 'Enter a search term',
+                        Expanded(
+                          flex: 2,
+                          child: TextFormField(
+                            decoration: const InputDecoration(
+                              border: OutlineInputBorder(),
+                              hintText: 'Enter a search term',
+                            ),
                           ),
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
-                  Row(
-                    children: [
-                      const Expanded(
-                        flex: 1,
-                        child: Text(
-                          'DIAS:',
-                          style: TextStyle(
-                            fontSize: 13,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.black,
+                  SizedBox(
+                    height: 50,
+                    width: 250,
+                    child: Row(
+                      children: [
+                        const Expanded(
+                          flex: 1,
+                          child: Text(
+                            'DIAS:',
+                            style: TextStyle(
+                              fontSize: 15,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.black,
+                            ),
                           ),
                         ),
-                      ),
-                      const SizedBox(width: 10),
-                      Expanded(
-                        flex: 5,
-                        child: TextFormField(
-                          decoration: const InputDecoration(
-                            border: OutlineInputBorder(),
-                            hintText: 'Enter a search term',
+                        const SizedBox(width: 10),
+                        Expanded(
+                          flex: 3,
+                          child: TextFormField(
+                            decoration: const InputDecoration(
+                              border: OutlineInputBorder(),
+                              hintText: 'Enter a search term',
+                            ),
                           ),
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
-                  Row(
-                    children: [
-                      const Expanded(
-                        flex: 2,
-                        child: Text(
-                          'VEZES POR DIA:',
-                          style: TextStyle(
-                            fontSize: 13,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.black,
+                  SizedBox(
+                    height: 50,
+                    width: 300,
+                    child: Row(
+                      children: [
+                        const Expanded(
+                          flex: 2,
+                          child: Text(
+                            'VEZES POR DIA:',
+                            style: TextStyle(
+                              fontSize: 15,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.black,
+                            ),
                           ),
                         ),
-                      ),
-                      const SizedBox(width: 10),
-                      Expanded(
-                        flex: 2,
-                        child: TextFormField(
-                          keyboardType: TextInputType.number,
-                          decoration: const InputDecoration(
-                            border: OutlineInputBorder(),
-                            hintText: '1,2...',
+                        const SizedBox(width: 10),
+                        Expanded(
+                          flex: 2,
+                          child: TextFormField(
+                            keyboardType: TextInputType.number,
+                            decoration: const InputDecoration(
+                              border: OutlineInputBorder(),
+                              hintText: '1,2...',
+                            ),
                           ),
                         ),
-                      ),
-                      const SizedBox(width: 10),
-                      const Expanded(
-                        flex: 2,
-                        child: Text(
-                          'PILULAS POR VEZ:',
-                          style: TextStyle(
-                            fontSize: 13,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.black,
+                        const SizedBox(width: 10),
+                        const Expanded(
+                          flex: 2,
+                          child: Text(
+                            'PILULAS POR VEZ:',
+                            style: TextStyle(
+                              fontSize: 15,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.black,
+                            ),
                           ),
                         ),
-                      ),
-                      const SizedBox(width: 10),
-                      Expanded(
-                        flex: 2,
-                        child: TextFormField(
-                          keyboardType: TextInputType.number,
-                          decoration: const InputDecoration(
-                            border: OutlineInputBorder(),
-                            hintText: '1,2...',
+                        const SizedBox(width: 10),
+                        Expanded(
+                          flex: 2,
+                          child: TextFormField(
+                            keyboardType: TextInputType.number,
+                            decoration: const InputDecoration(
+                              border: OutlineInputBorder(),
+                              hintText: '1,2...',
+                            ),
                           ),
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
                   Column(
                     children: [
                       const Text(
                         'HORÁRIO:',
                         style: TextStyle(
-                          fontSize: 13,
+                          fontSize: 15,
                           fontWeight: FontWeight.bold,
                           color: Colors.black,
                         ),
@@ -172,10 +183,11 @@ class EditarRemedio extends StatelessWidget {
                           ),
                         ),
                       ),
+                    
                       IconButton(
                         icon: const Icon(
-                          Icons.check_box,
-                          color: Colors.green,
+                          Icons.check_circle,
+                          color: Colors.blue,
                           size: 80,
                         ),
                         onPressed: () {
