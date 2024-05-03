@@ -6,6 +6,16 @@ import 'package:pillbox/navbar.dart';
 import 'dart:math' as math;
 
 import 'package:pillbox/principal.dart';
+class editarRemedio extends StatelessWidget {
+  const editarRemedio({super.key});
+
+
+  @override
+  Widget build(BuildContext context) {
+    return const MaterialApp(
+    );
+  }
+}
 
 class EditarRemedio extends StatelessWidget {
   const EditarRemedio({super.key});
@@ -118,8 +128,7 @@ class EditarRemedio extends StatelessWidget {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                      builder: (context) =>
-                          const PagPrincipal()), // Certifique-se de ter o VisualizarRemedio implementado corretamente
+                      builder: (context) => PagPrincipal()), // Certifique-se de ter o VisualizarRemedio implementado corretamente
                 );
               },
               style: ElevatedButton.styleFrom(

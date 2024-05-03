@@ -1,35 +1,56 @@
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:pillbox/horas.dart';
-import 'package:pillbox/navbar.dart';
-import 'dart:math' as math;
 
-class visualizarRemedio extends StatelessWidget {
-  const visualizarRemedio({super.key});
-
+class OvalWidget extends StatelessWidget {
+  const OvalWidget({super.key});
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp();
-  }
-}
-
-class VisualizarRemedio extends StatelessWidget {
-  const VisualizarRemedio({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: const Color.fromARGB(245, 255, 249, 226),
-      appBar: AppBar(
-        title: const Text('Hello World'),
-      ),
-      body: const Center(
-        child: Text(
-          'Hello World!',
-          style: TextStyle(fontSize: 24),
+    return Container(
+        width: 300,
+        height: 500,
+        decoration: BoxDecoration(
+          color: const Color.fromARGB(255, 11, 11, 11),
+          borderRadius: BorderRadius.circular(50),
         ),
-      ),
+        child: const Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text(
+              '1',
+              style: TextStyle(
+                fontSize: 32,
+                fontWeight: FontWeight.bold,
+                color: Colors.white,
+              ),
+            ),
+            SizedBox(height: 10),
+            Text(
+              'NOME DO REMÉDIO',
+              style: TextStyle(
+                fontSize: 22,
+                fontWeight: FontWeight.bold,
+                color: Colors.white,
+              ),
+            ),
+            SizedBox(height: 10),
+            Text(
+              'HORÁRIO:',
+              style: TextStyle(
+                fontSize: 20,
+                fontWeight: FontWeight.bold,
+                color: Colors.white,
+              ),
+            ),
+            SizedBox(height: 10),
+            Text(
+              'DIAS:',
+              style: TextStyle(
+                fontSize: 20,
+                fontWeight: FontWeight.bold,
+                color: Colors.white,
+              ),
+            ),
+          ],
+        ),
     );
   }
 }
