@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'principal.dart';
+import 'common/bluetooth_control_page.dart';
 
 void main() => runApp(const MyApp());
 
@@ -8,6 +9,10 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(home: PagPrincipal());
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      home: PagPrincipal(),
+      //home: BluetoothControlPage(),
+    );
   }
 }
