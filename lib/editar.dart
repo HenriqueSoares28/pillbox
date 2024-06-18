@@ -1,20 +1,18 @@
-import 'dart:math';
-
 import 'package:flutter/material.dart';
 import 'package:pillbox/editarRemedio.dart';
 import 'package:pillbox/navbar.dart';
-import 'dart:math' as math; // Adicionando o apelido 'math' para o pacote dart:math
+import 'dart:math' as math;
 
 class PagEdit extends StatelessWidget {
   const PagEdit({super.key});
 
-   @override
+  @override
   Widget build(BuildContext context) {
     double screenWidth = MediaQuery.of(context).size.width;
     double screenHeight = MediaQuery.of(context).size.height;
 
     return MaterialApp(
-      title: 'editar',
+      title: 'Editar Remédio',
       home: Scaffold(
         backgroundColor: const Color.fromARGB(245, 255, 249, 226),
         bottomNavigationBar: const Navbar(),
@@ -46,7 +44,7 @@ class PagEdit extends StatelessWidget {
                 child: Padding(
                   padding: EdgeInsets.symmetric(horizontal: 20),
                   child: Text(
-                    'SELECIONE UM COMPARTIMENTO PARA ADICIONAR OU DELETAR UM REMEDIO',
+                    'SELECIONE UM COMPARTIMENTO PARA ADICIONAR OU DELETAR UM REMÉDIO',
                     textAlign: TextAlign.center,
                     style: TextStyle(
                       fontSize: 20,
@@ -64,26 +62,25 @@ class PagEdit extends StatelessWidget {
                 child: Stack(
                   alignment: Alignment.center,
                   children: List.generate(8, (index) {
-                    final double angle = (2 * pi * index / 8) - (pi / 8); // Ajuste do ângulo inicial
+                    final double angle = (2 * math.pi * index / 8) - (math.pi / 8); // Ajuste do ângulo inicial
                     const double radius = 115; // Adjust radius as needed
 
-                    double buttonX = screenWidth / 2 + radius * cos(angle);
-                    double buttonY = screenHeight / 2 + radius * sin(angle);
+                    double buttonX = screenWidth / 2 + radius * math.cos(angle);
+                    double buttonY = screenHeight / 2 + radius * math.sin(angle);
 
                     return Positioned(
-                      
                       left: buttonX - 40, // Adjust button size
                       top: buttonY - 40, // Adjust button size
                       child: ElevatedButton(
                         onPressed: () {
-                          // Abra o contêiner de visualização de remédio
                           Navigator.push(
                             context,
-                            MaterialPageRoute(builder: (context) => const EditarRemedio()), // Certifique-se de ter o VisualizarRemedio implementado corretamente
+                            MaterialPageRoute(builder: (context) => EditarRemedio(compartmentNumber: (index + 1) % 8 + 1)),
                           );
                         },
                         style: ElevatedButton.styleFrom(
-                          foregroundColor: const Color.fromARGB(47, 20, 68, 128), backgroundColor: const Color.fromARGB(0, 0, 0, 0), // Cor do botão quando pressionado
+                          foregroundColor: const Color.fromARGB(47, 20, 68, 128),
+                          backgroundColor: const Color.fromARGB(0, 0, 0, 0), // Cor do botão quando pressionado
                           shape: const CircleBorder(), // Formato circular
                           minimumSize: const Size(50, 60), // Tamanho mínimo do botão
                         ),

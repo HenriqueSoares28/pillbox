@@ -54,21 +54,21 @@ class _LoginPageState extends State<LoginPage> {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Center(
+                    const Center(
                       child: Text(
                       'ESCREVA SEUS DADOS PARA ENTRAR',
                       style: TextStyle(fontSize: 24.0, fontWeight: FontWeight.bold),
                       textAlign: TextAlign.center,
                     ),
                   ),
-                    SizedBox(height: 32.0),
+                    const SizedBox(height: 32.0),
                     TextFormField(
                       controller: _emailController,
                       decoration: InputDecoration(
                         labelText: 'Email',
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(10.0),
-                          borderSide: BorderSide(
+                          borderSide: const BorderSide(
                             width: 2.0,
                           ),
                         ),
@@ -84,14 +84,14 @@ class _LoginPageState extends State<LoginPage> {
                         return null;
                       },
                     ),
-                    SizedBox(height: 16.0),
+                    const SizedBox(height: 16.0),
                     TextFormField(
                       controller: _passwordController,
                       decoration: InputDecoration(
                         labelText: 'Senha',
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(10.0),
-                          borderSide: BorderSide(
+                          borderSide: const BorderSide(
                             width: 2.0,
                           ),
                         ),
@@ -104,18 +104,18 @@ class _LoginPageState extends State<LoginPage> {
                         return null;
                       },
                     ),
-                    SizedBox(height: 16.0),
+                    const SizedBox(height: 16.0),
               ElevatedButton(
                 onPressed: _login,
                  style: ElevatedButton.styleFrom(
               foregroundColor: Colors.white, backgroundColor: const Color.fromARGB(255, 19, 20, 20),
-              padding: EdgeInsets.symmetric(horizontal: 45, vertical: 18), // Tamanho do botão
-              textStyle: TextStyle(
+              padding: const EdgeInsets.symmetric(horizontal: 45, vertical: 18), // Tamanho do botão
+              textStyle: const TextStyle(
                 fontSize: 24.0, // Tamanho do texto
                 fontWeight: FontWeight.bold, // Peso do texto
               ),
             ),
-                child: Text('ENTRAR'),
+                child: const Text('ENTRAR'),
               ),
                   ],
                 ),
