@@ -133,17 +133,17 @@ class _BluetoothControlPageState extends State<BluetoothControlPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Controle de LEDs via Bluetooth'),
+        title: const Text('Controle de LEDs via Bluetooth'),
         actions: [
           if (_connectedDevice != null)
             IconButton(
-              icon: Icon(Icons.arrow_back),
+              icon: const Icon(Icons.arrow_back),
               onPressed: _disconnectFromDevice,
             ),
         ],
       ),
       body: isConnecting
-          ? Center(child: CircularProgressIndicator())
+          ? const Center(child: CircularProgressIndicator())
           : _connectedDevice == null
               ? _buildDeviceList()
               : _buildControlPanel(),

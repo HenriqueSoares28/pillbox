@@ -160,7 +160,7 @@ class _PagPrincipalState extends State<PagPrincipal> {
   }
 
   void _startMedicationSchedule() {
-    Timer.periodic(Duration(minutes: 1), (timer) async {
+    Timer.periodic(Duration(seconds: 30), (timer) async {
       List<Map<String, dynamic>> remedios = await DatabaseHelper().getRemedios();
       String currentDay = _getCurrentDay();
       String currentTime = _getCurrentTime();
@@ -172,6 +172,8 @@ class _PagPrincipalState extends State<PagPrincipal> {
         if (remedy['days'].contains(currentDay) && remedy['time'] == currentTime) {
           logger.i('Time to take medication: ${remedy['name']}');
           _sendColorCommand(colors['Vermelho']!);  // Ajuste a cor ou comando conforme necessário
+        } else {
+          logger.i('Not time for medication: ${remedy['name']}');
         }
       }
     });
