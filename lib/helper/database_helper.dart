@@ -19,7 +19,7 @@ class DatabaseHelper {
     String path = join(await getDatabasesPath(), 'pillbox.db');
     
     // Delete the database for testing purposes to ensure a fresh creation
-    await deleteDatabase(path);
+    //await deleteDatabase(path);
 
     return await openDatabase(
       path,

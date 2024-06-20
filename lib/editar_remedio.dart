@@ -59,6 +59,7 @@ class _EditarRemedioState extends State<EditarRemedio> {
     // Verifica se o remédio já existe para decidir se deve inserir ou atualizar
     final existingRemedy = await DatabaseHelper().getRemedyByCompartment(widget.compartmentNumber);
     if (existingRemedy['name'] == 'N/A') {
+      print('Inserting remedy into database ${remedy.toString()} medication');
       await DatabaseHelper().insertRemedy(remedy);
     } else {
       await DatabaseHelper().updateRemedy(remedy);

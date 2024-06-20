@@ -209,11 +209,11 @@ class _PagPrincipalState extends State<PagPrincipal> {
 
       for (var remedy in remedios) {
         logger.i(
-            'Checking remedy: ${remedy['name']} at ${remedy['time']} on ${remedy['days']} ${remedy['compartment']} medication');
+            'Checking remedy: ${remedy['name']} at ${remedy['time']} on ${remedy['days']} ${remedy['cartNumber']} medication');
         if (remedy['days'].contains(currentDay) &&
             remedy['time'] == currentTime) {
           logger.i('Time to take medication: ${remedy['name']}');
-          String command = remedy['compartment'].toString();
+          String command = remedy['cartNumber'].toString();
           _pendingCommands.add(command); // Armazena o comando pendente
           if (isConnected) {
             _sendColorCommand(
