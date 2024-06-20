@@ -5,9 +5,10 @@ import 'package:pillbox/principal.dart';
 class EditarRemedio extends StatefulWidget {
   final int compartmentNumber;
 
-  const EditarRemedio({Key? key, required this.compartmentNumber}) : super(key: key);
+  const EditarRemedio({super.key, required this.compartmentNumber});
 
   @override
+  // ignore: library_private_types_in_public_api
   _EditarRemedioState createState() => _EditarRemedioState();
 }
 

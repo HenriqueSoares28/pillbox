@@ -4,9 +4,10 @@ import 'dart:async';
 import 'package:intl/intl.dart';
 
 class HorasAoVivo extends StatefulWidget {
-  const HorasAoVivo({Key? key}) : super(key: key);
+  const HorasAoVivo({super.key});
 
   @override
+  // ignore: library_private_types_in_public_api
   _HorasAoVivoState createState() => _HorasAoVivoState();
 }
 
@@ -31,9 +32,6 @@ class _HorasAoVivoState extends State<HorasAoVivo> {
   void _startTimer() {
     _timer = Timer.periodic(const Duration(seconds: 1), (timer) {
       final now = DateTime.now();
-      if (kDebugMode) {
-        print('Adicionando evento ao stream: $now');
-      }
       _dateTimeController.add(now);
     });
   }
@@ -49,9 +47,6 @@ class _HorasAoVivoState extends State<HorasAoVivo> {
       builder: (context, snapshot) {
         if (snapshot.hasData) {
           final dateTime = snapshot.data!;
-          if (kDebugMode) {
-            print('Recebido novo dado do stream: $dateTime');
-          }
           return Text(
             DateFormat('HH:mm').format(dateTime),
             style: const TextStyle(

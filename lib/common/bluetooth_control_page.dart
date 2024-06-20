@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bluetooth_serial/flutter_bluetooth_serial.dart';
 import 'dart:convert';
+import 'package:logger/logger.dart'; // Import the logger package
 
 
 class BluetoothControlPage extends StatefulWidget {
@@ -85,13 +86,13 @@ class _BluetoothControlPageState extends State<BluetoothControlPage> {
       });
 
       _connection.input?.listen(null).onDone(() {
-        print('Disconnected by remote request');
+        print('Disconnected by remote request log');
         setState(() {
           isConnected = false;
         });
       });
     }).catchError((error) {
-      print('Cannot connect, exception occurred');
+      print('Cannot connect, exception occurred log');
       print(error);
       setState(() {
         isConnecting = false;
@@ -99,16 +100,18 @@ class _BluetoothControlPageState extends State<BluetoothControlPage> {
     });
   }
 
+
   void _sendColorCommand(String command) async {
     if (_connection == null || !isConnected) {
-      print("No connection or not connected");
+      Logger().w("No connection or not connected medication "); // Use the logger
       return;
     }
     try {
-      _connection!.output.add(utf8.encode(command + "\r\n"));
+      _connection!.output.add(utf8.encode(command));
       await _connection!.output.allSent;
+      Logger().i('Command sent: $command medication '); // Use the logger
     } catch (e) {
-      print("Failed to send command: $e");
+      Logger().e("Failed to send command medication : $e"); // Use the logger
     }
   }
 

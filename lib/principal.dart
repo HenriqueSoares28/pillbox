@@ -3,20 +3,24 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:pillbox/horas.dart';
 import 'package:pillbox/navbar.dart';
-import 'package:pillbox/visualizarRemedio.dart';
+import 'package:pillbox/visualizar_remedio.dart';
 import 'package:pillbox/helper/database_helper.dart';
 import 'package:flutter_bluetooth_serial/flutter_bluetooth_serial.dart';
 import 'dart:convert';
 import 'dart:async';
 import 'package:logger/logger.dart';
 
+import 'dart:io' show Platform;
+import 'package:permission_handler/permission_handler.dart';
+
 // Configurar o logger
 final logger = Logger();
 
 class PagPrincipal extends StatefulWidget {
-  PagPrincipal({Key? key}) : super(key: key);
+  const PagPrincipal({super.key});
 
   @override
+  // ignore: library_private_types_in_public_api
   _PagPrincipalState createState() => _PagPrincipalState();
 }
 
@@ -32,6 +36,8 @@ class _PagPrincipalState extends State<PagPrincipal> {
   BluetoothConnection? _connection;
   bool isConnecting = false;
   bool isConnected = false;
+
+  List<String> _pendingCommands = [];
 
   final Map<String, String> colors = {
     'Vermelho': '1',
@@ -49,9 +55,36 @@ class _PagPrincipalState extends State<PagPrincipal> {
     super.initState();
     // Iniciar a conexão Bluetooth
     _initializeBluetoothConnection();
+    // Iniciar o agendamento dos remédios
+    _startMedicationSchedule();
   }
 
-  void _initializeBluetoothConnection() {
+  Future<void> _requestPermissions() async {
+    if (Platform.isAndroid) {
+      if (await Permission.bluetooth.status.isDenied) {
+        await Permission.bluetooth.request();
+      }
+      if (await Permission.location.status.isDenied) {
+        await Permission.location.request();
+      }
+      if (Platform.version.contains("12")) {
+        if (await Permission.bluetoothScan.status.isDenied) {
+          await Permission.bluetoothScan.request();
+        }
+        if (await Permission.bluetoothConnect.status.isDenied) {
+          await Permission.bluetoothConnect.request();
+        }
+        if (await Permission.bluetoothAdvertise.status.isDenied) {
+          await Permission.bluetoothAdvertise.request();
+        }
+      }
+    }
+  }
+
+  void _initializeBluetoothConnection() async {
+    // Solicitar permissões de Bluetooth
+    await _requestPermissions();
+
     FlutterBluetoothSerial.instance.state.then((state) {
       setState(() {
         _bluetoothState = state;
@@ -63,7 +96,9 @@ class _PagPrincipalState extends State<PagPrincipal> {
       }
     });
 
-    FlutterBluetoothSerial.instance.onStateChanged().listen((BluetoothState state) {
+    FlutterBluetoothSerial.instance
+        .onStateChanged()
+        .listen((BluetoothState state) {
       setState(() {
         _bluetoothState = state;
       });
@@ -111,6 +146,12 @@ class _PagPrincipalState extends State<PagPrincipal> {
         isConnecting = false;
       });
 
+      // Envia todos os comandos pendentes
+      _pendingCommands.forEach((command) {
+        _sendColorCommand(command);
+      });
+      _pendingCommands.clear(); // Limpa a lista de comandos pendentes
+
       _connection.input?.listen(null).onDone(() {
         logger.i('Disconnected by remote request');
         setState(() {
@@ -119,8 +160,6 @@ class _PagPrincipalState extends State<PagPrincipal> {
         // Try to reconnect
         _connectToDevice(device);
       });
-
-      _startMedicationSchedule(); // Inicia o agendamento dos remédios
     }).catchError((error) {
       logger.e('Cannot connect, exception occurred', error);
       setState(() {
@@ -135,15 +174,15 @@ class _PagPrincipalState extends State<PagPrincipal> {
 
   void _sendColorCommand(String command) async {
     if (_connection == null || !isConnected) {
-      logger.w("No connection or not connected");
+      logger.w("No connection or not connected medication ");
       return;
     }
     try {
-      _connection!.output.add(utf8.encode(command + "\r\n"));
+      _connection!.output.add(utf8.encode(command));
       await _connection!.output.allSent;
-      logger.i('Command sent: $command');
+      logger.i('Command sent: $command medication ');
     } catch (e) {
-      logger.e("Failed to send command: $e");
+      logger.e("Failed to send command medication : $e");
     }
   }
 
@@ -161,17 +200,25 @@ class _PagPrincipalState extends State<PagPrincipal> {
 
   void _startMedicationSchedule() {
     Timer.periodic(Duration(seconds: 30), (timer) async {
-      List<Map<String, dynamic>> remedios = await DatabaseHelper().getRemedios();
+      List<Map<String, dynamic>> remedios =
+          await DatabaseHelper().getRemedios();
       String currentDay = _getCurrentDay();
       String currentTime = _getCurrentTime();
 
       logger.i('Checking medications for $currentDay at $currentTime');
 
       for (var remedy in remedios) {
-        logger.i('Checking remedy: ${remedy['name']} at ${remedy['time']} on ${remedy['days']}');
-        if (remedy['days'].contains(currentDay) && remedy['time'] == currentTime) {
+        logger.i(
+            'Checking remedy: ${remedy['name']} at ${remedy['time']} on ${remedy['days']} ${remedy['compartment']} medication');
+        if (remedy['days'].contains(currentDay) &&
+            remedy['time'] == currentTime) {
           logger.i('Time to take medication: ${remedy['name']}');
-          _sendColorCommand(colors['Vermelho']!);  // Ajuste a cor ou comando conforme necessário
+          String command = remedy['compartment'].toString();
+          _pendingCommands.add(command); // Armazena o comando pendente
+          if (isConnected) {
+            _sendColorCommand(
+                command); // Envia o comando imediatamente se estiver conectado
+          }
         } else {
           logger.i('Not time for medication: ${remedy['name']}');
         }
@@ -207,7 +254,8 @@ class _PagPrincipalState extends State<PagPrincipal> {
   }
 
   void _loadRemedyData(int compartmentNumber) async {
-    final remedy = await DatabaseHelper().getRemedyByCompartment(compartmentNumber);
+    final remedy =
+        await DatabaseHelper().getRemedyByCompartment(compartmentNumber);
     setState(() {
       _currentCompartment = compartmentNumber;
       _remedyName = remedy['name'];
@@ -273,7 +321,7 @@ class _PagPrincipalState extends State<PagPrincipal> {
               visible: _showOverlay,
               child: Padding(
                 padding: const EdgeInsets.only(top: 70),
-                child: OvalWidget(
+                child: VisualizarRemedio(
                   compartmentNumber: _currentCompartment.toString(),
                   remedyName: _remedyName,
                   schedule: _schedule,
@@ -291,7 +339,8 @@ class _PagPrincipalState extends State<PagPrincipal> {
               child: Stack(
                 alignment: Alignment.center,
                 children: List.generate(8, (index) {
-                  final double angle = (2 * pi * index / 8) - (pi / 8); // Ajuste do ângulo inicial
+                  final double angle = (2 * pi * index / 8) -
+                      (pi / 8); // Ajuste do ângulo inicial
                   const double radius = 115; // Adjust radius as needed
 
                   // Ajuste para garantir que os índices correspondam aos compartimentos
@@ -311,10 +360,12 @@ class _PagPrincipalState extends State<PagPrincipal> {
                             },
                       style: ElevatedButton.styleFrom(
                         foregroundColor: Colors.transparent,
-                        backgroundColor: Colors.transparent, // Cor do botão quando pressionado
+                        backgroundColor: Colors
+                            .transparent, // Cor do botão quando pressionado
                         elevation: 0, // Remove a sombra do botão
                         shape: const CircleBorder(), // Formato circular
-                        minimumSize: const Size(50, 60), // Tamanho mínimo do botão
+                        minimumSize:
+                            const Size(50, 60), // Tamanho mínimo do botão
                       ),
                       child: const SizedBox(
                         width: 30,

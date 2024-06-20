@@ -1,20 +1,20 @@
 import 'package:flutter/material.dart';
 
-class OvalWidget extends StatelessWidget {
+class VisualizarRemedio extends StatelessWidget {
   final String compartmentNumber;
   final String remedyName;
   final String schedule;
   final String days;
   final VoidCallback onClose;
 
-  const OvalWidget({
-    Key? key,
+  const VisualizarRemedio({
+    super.key,
     required this.compartmentNumber,
     required this.remedyName,
     required this.schedule,
     required this.days,
     required this.onClose,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

@@ -3,9 +3,10 @@ import 'package:pillbox/editar.dart';
 import 'package:pillbox/principal.dart';
 
 class Navbar extends StatefulWidget {
-  const Navbar({Key? key}) : super(key: key);
+  const Navbar({super.key});
 
   @override
+  // ignore: library_private_types_in_public_api
   _NavbarState createState() => _NavbarState();
 }
 

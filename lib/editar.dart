@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:pillbox/editarRemedio.dart';
+import 'package:pillbox/editar_remedio.dart';
 import 'package:pillbox/navbar.dart';
 import 'dart:math' as math;
 
