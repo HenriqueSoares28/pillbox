@@ -42,7 +42,7 @@ Contribuições são bem-vindas! Se você tiver sugestões ou correções, sinta
 
 ## Autor
 
-Henrique França
+Henrique França, Leonardo Yukio, Luiza Loures
 
 ## Licença
 
